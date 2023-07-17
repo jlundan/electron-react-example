@@ -44,7 +44,7 @@ npm run package -- --win
 After packaging, the setup exe file should be available in the `release/build` directory.
 
 ## White screen in the development mode
-If you are running this example in development mode, and you see a white screen (nothing rendered), just select `Wiev->Reload` in the example application menus (or press Ctrl+R). This
+If you are running this example in development mode, and you see a white screen (nothing rendered), just select `View->Reload` in the example application menus (or press Ctrl+R). This
 occurs because the Webpack dev server is not yet ready when the application is started. This is not an issue in production builds. 
 Since this is a simple example, I have implemented a simple wait mechanism to wait for the Webpack dev server to start. Depending on the 
 speed of your webpack build, the wait might not be long enough. If this is the case, you can increase the default wait time (2000ms) in the `package.json`'s sleep script.
