@@ -1,0 +1,4 @@
+node_modules
+release/build
+release/app/main
+release/app/renderer

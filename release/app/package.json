@@ -1,0 +1,9 @@
+{
+  "name": "electron-react-example",
+  "version": "1.0.0",
+  "description": "An example of an Electron app with React and Webpack",
+  "license": "MIT",
+  "author": "stuckpointer.com",
+  "main": "./main/main.js",
+  "dependencies": {}
+}
