@@ -5,10 +5,6 @@ module.exports = {
     devtool: 'inline-source-map',
     entry: './src/renderer/index.jsx',
 
-    output: {
-        filename: 'renderer.js'
-    },
-
     module: {
         rules: [{
             test: /\.(jsx)$/,
