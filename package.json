@@ -5,11 +5,11 @@
   "main": "src/main/main.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:renderer\" \"npm run sleep && npm run dev:main\"",
-    "dev:renderer": "cross-env NODE_ENV=development webpack serve --config webpack.renderer.dev.config.js",
+    "dev:renderer": "webpack serve --config webpack.renderer.dev.config.js",
     "dev:main": "cross-env NODE_ENV=development electronmon src/main/main.js",
     "package": "npm run bundle:main && npm run bundle:renderer && electron-builder",
     "bundle:main": "cross-env NODE_ENV=production webpack --config webpack.main.prod.config.js",
-    "bundle:renderer": "cross-env NODE_ENV=production webpack --config webpack.renderer.prod.config.js",
+    "bundle:renderer": "webpack --config webpack.renderer.prod.config.js",
     "clean": "rimraf release/app/main release/app/renderer release/build",
     "sleep": "node -e \"setTimeout(() => process.exit(0), 2000)\""
   },
