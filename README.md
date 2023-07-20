@@ -1,8 +1,9 @@
 # An Electron React Example
 
-This is an example of an Electron application using React bundled with [Webpack](https://webpack.js.org/). The example aims to be as simple as possible, skipping the use
-of Webpack DLL and other speed optimisations. You might end up using these in your own application, however all might not, so I didn't want to make this example
-more complicated than it needs to be.
+This is an example of an Electron application using React bundled with [Webpack](https://webpack.js.org/). It is a part of my [blog post](https://stuckpointer.com/electron-and-react-part-3-a-project-template/) about using Electron with React.
+
+The example aims to be as simple as possible, skipping the use of Webpack DLL and other speed optimisations. 
+You might end up using these in your own application, however all might not, so I didn't want to make this example more complicated than it needs to be.
 
 The example can be currently packaged for Linux and Windows. Windows builds are verified with Windows developer VMs provided by Microsoft. I don't own any Apple
 products currently, so I can't verify the macOS builds. If you have a Mac and can verify the macOS builds, please feel free to create a pull request.
