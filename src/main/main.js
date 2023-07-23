@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const {URL} = require("url");
 const path = require("path");
 
@@ -14,6 +14,17 @@ app.on('activate', () => {
     }
 });
 
+ipcMain.handle('load-dependencies', async (_event) => {
+    const dependencies = require('../../package.json').devDependencies;
+    return Object.entries(dependencies).map(([key, value]) => {
+        return {
+            name: key,
+            version: value
+        };
+    });
+});
+
+
 (async () => {
     await app.whenReady();
     await createWindow();
@@ -24,7 +35,19 @@ async function createWindow (){
         width: 800,
         height: 600,
         icon: path.join(__dirname, '..', '..', 'assets', 'icons', '128x128.png'),
-    })
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        }
+    });
+
+    ipcMain.on('set-title', (_event, title) => {
+        win.setTitle(title);
+    });
+
+    ipcMain.on('request-greeting', (_event, greeting) => {
+        win.webContents.send('greeting', `Hello: ${greeting}`)
+    });
+
     await win.loadURL(
         process.env.NODE_ENV === 'development' ? getDevelopmentFileUrl() : getProductionFileUrl()
     );
