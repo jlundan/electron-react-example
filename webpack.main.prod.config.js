@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
     mode: 'production',
@@ -6,12 +6,13 @@ module.exports = {
     target: 'electron-main',
 
     entry: {
-        main: "./src/main/main.js"
+        main: './src/main/main.js',
+        preload: './src/main/preload.js'
     },
 
     output: {
         path: path.join(__dirname, 'release', 'app', "main"),
-        filename: 'main.js',
+        filename: '[name].js',
         library: {
             type: 'umd',
         },
