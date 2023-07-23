@@ -1,8 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-source-map',
     entry: './src/renderer/index.jsx',
 
     module: {
@@ -25,6 +26,7 @@ module.exports = {
     },
 
     plugins: [
+        new ReactRefreshWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/renderer/index.html'
         })
