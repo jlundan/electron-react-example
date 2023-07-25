@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, session} = require('electron')
 const {URL} = require("url");
 const path = require("path");
 
@@ -24,6 +24,12 @@ ipcMain.handle('load-dependencies', async (_event) => {
     });
 });
 
+if (process.env.NODE_ENV === 'development') {
+    // Set Chromium log level to "fatal" (3) to suppress warnings about React Dev Tools. These would be printed in
+    // the console every time the dev tools are opened in the BrowserWindow.
+    // https://chromium.googlesource.com/chromium/src/+/HEAD/base/logging.h#376
+    app.commandLine.appendSwitch('log-level', '3');
+}
 
 (async () => {
     await app.whenReady();
@@ -31,6 +37,10 @@ ipcMain.handle('load-dependencies', async (_event) => {
 })();
 
 async function createWindow (){
+    if (process.env.NODE_ENV === 'development') {
+        await installReactDevTools();
+    }
+
     const win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -59,4 +69,26 @@ function getDevelopmentFileUrl() {
 
 function getProductionFileUrl () {
     return `file://${path.join(__dirname, '..', 'renderer', 'index.html')}`;
+}
+
+async function installReactDevTools() {
+    // This will cause:
+    // "Manifest version 2 is deprecated, and support will be removed in 2023. See https://developer.chrome.com/blog/mv2-transition/ for more details."
+    // in the console every time the main process is started.
+    //
+    // As far as I know, it is the only way to get React Dev Tools to work with current Electron. I have not found a way to suppress the warning.
+    // Please leave a PR if you know how to get rid of the warning.
+    //
+    // There are also libraries for doing this, like https://github.com/jonluca/electron-extension-installer, but they basically do the same thing with the
+    // exception that they download the extension from a custom server.
+
+    // https://github.com/electron/electron/issues/37876
+    // https://github.com/facebook/react/issues/25843
+    const extensionOptions = {
+        allowFileAccess: true,
+    };
+    await session.defaultSession.loadExtension(
+        path.join(__dirname, '../../workarounds/react-dev-tools'),
+        extensionOptions
+    );
 }
