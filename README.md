@@ -11,7 +11,7 @@ products currently, so I can't verify the macOS builds. If you have a Mac and ca
 The example is not meant for production use, but rather as a starting point to understand how to use Electron with React. If you feel like it, however, you can use
 the example as a basis for your own application and add missing "production" features, such as [DLLs](https://webpack.js.org/plugins/dll-plugin/), automatic updates, etc. yourself.
 
-If you are looking for a more comprehensive (and a bit more involved) example, I recommend checking out [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
+If you are looking for a more comprehensive (and a bit more involved) example with Typescript, I recommend checking out [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
 
 ## Running the example
 
